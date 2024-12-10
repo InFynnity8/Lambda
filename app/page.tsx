@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="bg-white dark:bg-slate-800">
-      <h1>Hello</h1>
-      <Button variant='outline'>Click me</Button>
+    <div className="flex items-center justify-center flex-col h-[100vh]">
+      <h1>Welcome to Lambda</h1>
+      <Link href="/teacher">
+        <Button variant="outline" className="m-5">Teacher</Button>
+      </Link>
+
+      <Link href="/teacher">
+        <Button variant="outline">Student</Button>
+      </Link>
     </div>
   );
 }
