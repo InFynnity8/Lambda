@@ -11,8 +11,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // localStorage.setItem("isDarkMode", 'true');
+  // // Retrieve the boolean value
+  // const isDarkMode = localStorage.getItem("isDarkMode") === "true";
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`${false ? 'dark': ''}`}>
       <body>{children}</body>
     </html>
   );

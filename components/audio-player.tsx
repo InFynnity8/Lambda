@@ -39,13 +39,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
         title: file.name,
         artist: "Unknown Artist",
         src: URL.createObjectURL(file),
-      }));
+      }
+    ));
       setTracks((prevTracks) => [...prevTracks, ...newTracks]);
     }
   };
 
   // Function to handle play/pause toggle
   const handlePlayPause = () => {
+    
+    console.log(tracks)
     if (isPlaying) {
       audioRef.current?.pause();
       setIsPlaying(false);
@@ -108,20 +111,17 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
 
   // JSX return statement rendering the Audio Player UI
   return (
-    <div className="flex flex-col items-center justify-center bg-background text-foreground">
+    <div className="flex flex-col items-center justify-center bg-transparent text-foreground">
       <div className="max-w-md w-full space-y-4">
 
         
 
         <Card className="border-none">
-          <CardContent className="flex flex-col items-center justify-center gap-4 p-4">
+          <CardContent className="flex flex-col items-center justify-center gap-4 p-4 overflow-hidden">
             <div className="text-center">
               <h2 className="text-md font-bold">
-                {tracks[currentTrackIndex]?.title || "Audio Title"}
+                {tracks[currentTrackIndex]?.title || "Title"}
               </h2>
-              <p className="text-muted-foreground">
-                {tracks[currentTrackIndex]?.artist || "Person Name"}
-              </p>
             </div>
             <div className="w-full">
               <Progress value={progress} />
@@ -152,11 +152,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
             />
           </CardContent>
         </Card>
-        <div className="flex items-center justify-between mx-4">
-          <h1 className="text-[15px]">Audio Player</h1>
+        <div className="flex items-center mx-2">
           <label className="flex items-center cursor-pointer">
             <UploadIcon className="w-5 h-5 mr-2 size-8" />
-            <span>Upload</span>
             <input
               type="file"
               accept="audio/*"

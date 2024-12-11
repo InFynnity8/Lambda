@@ -1,29 +1,30 @@
-'use client'
+"use client";
 
-import { SidebarLeft } from "@/components/sidebar-left"
-import { SidebarRight } from "@/components/sidebar-right"
+import { SidebarLeft } from "@/components/sidebar-left";
+import { SidebarRight } from "@/components/sidebar-right";
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger
-} from "@/components/ui/sidebar"
-import { ChevronRight } from 'lucide-react';
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { ChevronRight } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import { usePathname } from "next/navigation"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import { usePathname } from "next/navigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
+
   return (
     <SidebarProvider>
       <SidebarLeft />
       <SidebarInset>
-      <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 bg-background">
+        <header className="sticky top-0 flex h-16 border-b-[1px] shrink-0 items-center gap-2 bg-transparent backdrop-blur-lg z-50">
           <div className="flex flex-1 items-center gap-2 px-3">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -33,14 +34,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <BreadcrumbItem>
                   <BreadcrumbPage className="line-clamp-1">
                     <p className="capitalize flex items-center">
-                    {pathname.slice(1, 8)}
-                    <ChevronRight className="text-gray-300 size-[15px]"/>
-                    {pathname.slice(9)}
+                      {pathname.slice(1, 8)}
+                      <ChevronRight className="text-gray-300 size-[15px]" />
+                      {pathname.slice(9)}
                     </p>
                   </BreadcrumbPage>
-                </BreadcrumbItem> 
+                </BreadcrumbItem>
               </BreadcrumbList>
-            </Breadcrumb> 
+            </Breadcrumb>
           </div>
         </header>
 
@@ -48,5 +49,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </SidebarInset>
       <SidebarRight />
     </SidebarProvider>
-  )
+  );
 }
