@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster"
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -15,8 +16,10 @@ export default function RootLayout({
   // // Retrieve the boolean value
   // const isDarkMode = localStorage.getItem("isDarkMode") === "true";
   return (
-    <html lang="en" className={`${false ? 'dark': ''}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${true ? 'dark': ''}`}>
+      <body>{children}
+      <Toaster />
+      </body>
     </html>
   );
 }

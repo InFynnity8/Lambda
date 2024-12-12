@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import RadialChart from "@/components/charts/radial-chart";
 import PieChartComp from "@/components/charts/pie-chart";
 import BarChartComp from "@/components/charts/bar-chart";
@@ -6,106 +7,13 @@ import RadarChartComp from "@/components/charts/radar-chart";
 import LineChartComp from "@/components/charts/line-chart";
 import LineChartSimp from "@/components/charts/line-chart-simple";
 import { ChartConfig } from "@/components/ui/chart";
+import { SubjectScores, RoundScores } from "@/types/records";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import BarChartMultiple from "@/components/charts/bar-chart-multiple";
+import { StudentPerformanceData } from "@/types/records";
+import BarChartSingle from "@/components/charts/bar-chart-single";
 
-const chartData = [
-  {
-    name: "Alice",
-    roundone: 87,
-    roundtwo: 92,
-    roundthree: 78,
-    roundfour: 78,
-    roundfive: 85,
-  },
-  {
-    name: "Bob",
-    roundone: 75,
-    roundtwo: 88,
-    roundthree: 88,
-    roundfour: 91,
-    roundfive: 84,
-  },
-  {
-    name: "Charlie",
-    roundone: 90,
-    roundtwo: 85,
-    roundthree: 85,
-    roundfour: 88,
-    roundfive: 93,
-  },
-  {
-    name: "Diana",
-    roundone: 82,
-    roundtwo: 91,
-    roundthree: 91,
-    roundfour: 79,
-    roundfive: 87,
-  },
-  {
-    name: "Eve",
-    roundone: 94,
-    roundtwo: 89,
-    roundthree: 89,
-    roundfour: 84,
-    roundfive: 90,
-  },
-  {
-    name: "Frank",
-    roundone: 88,
-    roundtwo: 78,
-    roundthree: 78,
-    roundfour: 85,
-    roundfive: 80,
-  },
-  {
-    name: "Grace",
-    roundone: 79,
-    roundtwo: 84,
-    roundthree: 84,
-    roundfour: 91,
-    roundfive: 88,
-  },
-  {
-    name: "Hank",
-    roundone: 85,
-    roundtwo: 87,
-    roundthree: 87,
-    roundfour: 92,
-    roundfive: 81,
-  },
-  {
-    name: "Ivy",
-    roundone: 80,
-    roundtwo: 83,
-    roundthree: 83,
-    roundfour: 88,
-    roundfive: 86,
-  },
-  {
-    name: "Jack",
-    roundone: 92,
-    roundtwo: 90,
-    roundthree: 90,
-    roundfour: 85,
-    roundfive: 89,
-  },
-  {
-    name: "Kathy",
-    roundone: 84,
-    roundtwo: 86,
-    roundthree: 86,
-    roundfour: 90,
-    roundfive: 88,
-  },
-  {
-    name: "Leo",
-    roundone: 89,
-    roundtwo: 92,
-    roundthree: 92,
-    roundfour: 87,
-    roundfive: 91,
-  },
-];
-const chartKey = [
+const scoreChartKey = [
   "roundone",
   "roundtwo",
   "roundthree",
@@ -113,14 +21,9 @@ const chartKey = [
   "roundfive",
 ];
 
-const totals = {
-  roundone: chartData.reduce((acc, curr) => acc + curr.roundone, 0),
-  roundtwo: chartData.reduce((acc, curr) => acc + curr.roundtwo, 0),
-  roundthree: chartData.reduce((acc, curr) => acc + curr.roundthree, 0),
-  roundfour: chartData.reduce((acc, curr) => acc + curr.roundfour, 0),
-  roundfive: chartData.reduce((acc, curr) => acc + curr.roundfive, 0),
-};
-const chartConfig = {
+const subjectChartKey = ["biology", "chemistry", "physics", "mathematics"];
+
+const scoreChartConfig = {
   views: {
     label: "Strength",
   },
@@ -146,34 +49,117 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+const subjectChartConfig = {
+  views: {
+    label: "Strength",
+  },
+  biology: {
+    label: "Biology",
+    color: "hsl(var(--chart-1))",
+  },
+  chemistry: {
+    label: "Chemistry",
+    color: "hsl(var(--chart-2))",
+  },
+  physics: {
+    label: "Physics",
+    color: "hsl(var(--chart-3))",
+  },
+  mathematics: {
+    label: "Mathematics",
+    color: "hsl(var(--chart-4))",
+  },
+} satisfies ChartConfig;
+
 const Analysis = () => {
+  const [scores, setScores] = useState<RoundScores[]>([]);
+  const [subjects, setSubjects] = useState<SubjectScores[]>([]);
+  const [speedContent, setSpeedContent] = useState<StudentPerformanceData[]>(
+    []
+  );
+
+  const scoreTotals = {
+    roundone: scores.reduce((acc, curr) => acc + curr.roundone, 0),
+    roundtwo: scores.reduce((acc, curr) => acc + curr.roundtwo, 0),
+    roundthree: scores.reduce((acc, curr) => acc + curr.roundthree, 0),
+    roundfour: scores.reduce((acc, curr) => acc + curr.roundfour, 0),
+    roundfive: scores.reduce((acc, curr) => acc + curr.roundfive, 0),
+  };
+
+  const subjectTotals = {
+    biology: subjects.reduce((acc, curr) => acc + curr.biology, 0),
+    chemistry: subjects.reduce((acc, curr) => acc + curr.chemistry, 0),
+    physics: subjects.reduce((acc, curr) => acc + curr.physics, 0),
+    mathematics: subjects.reduce((acc, curr) => acc + curr.mathematics, 0),
+  };
+
+  useEffect(() => {
+    fetch("/api/data")
+      .then((res) => res.json())
+      .then((records) => {
+        setScores(records.scores);
+        setSubjects(records.subjects);
+        setSpeedContent(records.speedContent);
+      });
+  }, []);
+
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4">
-      <div className="grid grid-cols-2 gap-4 mx-auto w-full max-w-3xl rounded-xl">
-        <RadialChart />
-        <PieChartComp />
-        <RadarChartComp />
-        <LineChartSimp />
-      </div>
-      <div className="mx-auto w-full max-w-3xl rounded-xl grid gap-4">
-        <LineChartComp />
-        <BarChartComp
-          title="Contest strength"
-          description="Showing the strengths of students with respect to rounds"
-          chartConfig={chartConfig}
-          chartData={chartData}
-          chartKey={chartKey}
-          totals={totals}
-        />
-        <BarChartComp
-          title="Subject strength"
-          description="Showing the strengths of students based on subjects"
-          chartConfig={chartConfig}
-          chartData={chartData}
-          chartKey={chartKey}
-          totals={totals}
-        />
-      </div>
+    <div className=" flex flex-col items-center">
+      <Tabs
+        defaultValue="circle"
+        className="w-full box-border flex flex-col items-center gap-2 p-4"
+      >
+        <TabsList>
+          <TabsTrigger value="circle">Circles</TabsTrigger>
+          <TabsTrigger value="bar">Bars</TabsTrigger>
+          <TabsTrigger value="line">Lines</TabsTrigger>
+        </TabsList>
+        <TabsContent value="circle" className="w-full">
+          <div className="flex w-full items-center flex-col">
+            <div className="grid grid-cols-2 gap-4 w-full rounded-xl max-w-[850px]">
+              <RadialChart />
+              <PieChartComp />
+              <RadarChartComp />
+              <LineChartSimp />
+            </div>
+          </div>
+        </TabsContent>
+        <TabsContent value="bar" className="w-full">
+          <div className="flex w-full items-center flex-col gap-4">
+            <div className="w-full rounded-xl grid gap-4 max-w-[850px]">
+              <BarChartComp
+                title="Round strength"
+                description="Showing the strengths of students with respect to rounds"
+                chartConfig={scoreChartConfig}
+                chartData={scores}
+                chartKey={scoreChartKey}
+                totals={scoreTotals}
+              />
+              <BarChartComp
+                title="Subject strength"
+                description="Showing the strengths of students based on subjects"
+                chartConfig={subjectChartConfig}
+                chartData={subjects}
+                chartKey={subjectChartKey}
+                totals={subjectTotals}
+              />
+            </div>
+            <div className="w-full rounded-xl grid grid-cols-2 gap-4 max-w-[850px]">
+              <BarChartMultiple chartData={speedContent} />
+              <BarChartSingle />
+            </div>
+          </div>
+        </TabsContent>
+        <TabsContent value="line" className="w-full">
+          <div className="flex w-full items-center flex-col">
+            <div className="w-full rounded-xl grid gap-4 max-w-[850px]">
+              <LineChartComp />
+              <LineChartComp />
+              <LineChartComp />
+            </div>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

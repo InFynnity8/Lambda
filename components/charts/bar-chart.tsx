@@ -21,22 +21,9 @@ import {
 interface ChartProps {
   title: string;
   description: string;
-  chartData: {
-    name: string;
-    roundone: number;
-    roundtwo: number;
-    roundthree: number;
-    roundfour: number;
-    roundfive: number;
-  }[];
+  chartData: object[];
   chartKey: string[];
-  totals: {
-    roundone: number;
-    roundtwo: number;
-    roundthree:  number;
-    roundfour:  number;
-    roundfive:   number;
-  };
+  totals: object;
   chartConfig: ChartConfig
 }
 
@@ -54,11 +41,11 @@ export default function Component({
     keyof typeof chartConfig
   >(chartKey[0]);
 
-  const total = React.useMemo(() => totals, []);
+  const total = React.useMemo(() => totals, [totals]);
 
   return (
     <Card>
-      <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
+      <CardHeader className="flex flex-col items-stretch  space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -79,7 +66,7 @@ export default function Component({
                 <span className="text-lg font-bold leading-none sm:text-3xl">
                   {Math.floor(
                     total[key as keyof typeof total] / chartData.length
-                  ).toLocaleString()}
+                  ).toLocaleString()}%
                 </span>
               </button>
             );

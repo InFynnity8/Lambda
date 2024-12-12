@@ -7,7 +7,7 @@ const getFilePath = () => {
   if (!fs.existsSync(userDataDir)) {
     fs.mkdirSync(userDataDir); // Create the directory if it doesn't exist
   }
-  return path.join(userDataDir, 'scores.json');
+  return path.join(userDataDir, 'records.json');
 };
 
 export async function GET() {

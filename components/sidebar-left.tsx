@@ -3,16 +3,16 @@
 import * as React from "react"
 import {
   AudioWaveform,
-  Blocks,
-  Calendar,
+  Fingerprint,
+  HardDriveUpload,
   Command,
   Home,
-  Inbox,
+  Pickaxe,
   MessageCircleQuestion,
-  Search,
+  ChartNoAxesCombined,
   Settings2,
-  Sparkles,
-  Trash2,
+  Library,
+  Database,
 } from "lucide-react"
 
 import { NavFavorites } from "@/components/nav-favorites"
@@ -55,35 +55,35 @@ const data = {
     {
       title: "Analysis",
       url: "/teacher/analysis",
-      icon: Search,
+      icon: ChartNoAxesCombined,
     },
     {
       title: "Bank",
       url: "/teacher/bank",
-      icon: Sparkles,
+      icon: Library,
     },
     {
       title: "Bio",
       url: "/teacher/bio",
-      icon: Blocks,
+      icon:  Fingerprint,
       badge: "10",
     },
     {
       title: "Database",
       url: "/teacher/database",
-      icon: Trash2,
+      icon: Database,
       badge: "10",
     },
     {
       title: "Tools",
       url: "/teacher/tools",
-      icon: Inbox,
+      icon: Pickaxe,
       badge: "10",
     },
     {
       title: "Upload",
       url: "/teacher/upload",
-      icon: Calendar,
+      icon: HardDriveUpload,
       badge: "10",
     },
   ],

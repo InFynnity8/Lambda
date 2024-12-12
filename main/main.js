@@ -6,6 +6,7 @@ import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+process.env.APP_USER_DATA = app.getPath('userData');
 
 
 const appServe = app.isPackaged ? serve({
