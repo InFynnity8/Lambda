@@ -27,8 +27,8 @@ export default function Home() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const validateTeacher = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const validateTeacher = () => {
+    // e.preventDefault();
     if (value.length !== 6) {
       toast({
         title: "Uh oh! Something went wrong.",
@@ -46,7 +46,7 @@ export default function Home() {
       router.push("/teacher");
       setTimeout(() => {
         setValue("");
-      }, 3000);
+      }, 10000);
     }
   };
 
@@ -71,7 +71,8 @@ export default function Home() {
                 maxLength={6}
                 pattern={REGEXP_ONLY_DIGITS}
                 value={value}
-                onChange={(value) => setValue(value)}
+                onChange={(value) => setValue(value)} 
+                onComplete={validateTeacher}
               >
                 <InputOTPGroup>
                   <InputOTPSlot index={0} className="size-[58px] text-3xl" />
@@ -100,7 +101,7 @@ export default function Home() {
             </CardContent>
             <CardFooter>
               <Link href="/student">
-                <Button>login</Button>
+                <Button>Login</Button>
               </Link>
             </CardFooter>
           </Card>

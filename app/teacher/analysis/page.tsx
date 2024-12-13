@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BarChartMultiple from "@/components/charts/bar-chart-multiple";
 import { StudentPerformanceData } from "@/types/records";
 import BarChartSingle from "@/components/charts/bar-chart-single";
+import Notes from "@/components/notes";
 
 const scoreChartKey = [
   "roundone",
@@ -29,11 +30,11 @@ const scoreChartConfig = {
   },
   roundone: {
     label: "Round 1",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-3))",
   },
   roundtwo: {
     label: "Round 2",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-3))",
   },
   roundthree: {
     label: "Round 3",
@@ -41,11 +42,11 @@ const scoreChartConfig = {
   },
   roundfour: {
     label: "Round 4",
-    color: "hsl(var(--chart-4))",
+    color: "hsl(var(--chart-3))",
   },
   roundfive: {
     label: "Round 5",
-    color: "hsl(var(--chart-5))",
+    color: "hsl(var(--chart-3))",
   },
 } satisfies ChartConfig;
 
@@ -55,11 +56,11 @@ const subjectChartConfig = {
   },
   biology: {
     label: "Biology",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-3))",
   },
   chemistry: {
     label: "Chemistry",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-3))",
   },
   physics: {
     label: "Physics",
@@ -67,7 +68,7 @@ const subjectChartConfig = {
   },
   mathematics: {
     label: "Mathematics",
-    color: "hsl(var(--chart-4))",
+    color: "hsl(var(--chart-3))",
   },
 } satisfies ChartConfig;
 
@@ -110,22 +111,36 @@ const Analysis = () => {
         className="w-full box-border flex flex-col items-center gap-2 p-4"
       >
         <TabsList>
-          <TabsTrigger value="circle">Circles</TabsTrigger>
-          <TabsTrigger value="bar">Bars</TabsTrigger>
-          <TabsTrigger value="line">Lines</TabsTrigger>
+          <TabsTrigger value="circle">Team</TabsTrigger>
+          <TabsTrigger value="bar">Performance</TabsTrigger>
+          <TabsTrigger value="line">Growth</TabsTrigger>
         </TabsList>
         <TabsContent value="circle" className="w-full">
           <div className="flex w-full items-center flex-col">
             <div className="grid grid-cols-2 gap-4 w-full rounded-xl max-w-[850px]">
               <RadialChart />
+              <Notes
+                title="Notes"
+                description="Some minor tips"
+                content=""
+                footer=""
+              />
               <PieChartComp />
               <RadarChartComp />
-              <LineChartSimp />
             </div>
           </div>
         </TabsContent>
         <TabsContent value="bar" className="w-full">
           <div className="flex w-full items-center flex-col gap-4">
+            <div className="w-full rounded-xl grid grid-cols-2 gap-4 max-w-[850px]">
+              <BarChartSingle />
+              <Notes
+                title="Notes"
+                description="Some minor tips"
+                content=""
+                footer=""
+              />
+            </div>
             <div className="w-full rounded-xl grid gap-4 max-w-[850px]">
               <BarChartComp
                 title="Round strength"
@@ -143,15 +158,21 @@ const Analysis = () => {
                 chartKey={subjectChartKey}
                 totals={subjectTotals}
               />
-            </div>
-            <div className="w-full rounded-xl grid grid-cols-2 gap-4 max-w-[850px]">
               <BarChartMultiple chartData={speedContent} />
-              <BarChartSingle />
             </div>
           </div>
         </TabsContent>
         <TabsContent value="line" className="w-full">
-          <div className="flex w-full items-center flex-col">
+          <div className="flex w-full gap-4 items-center flex-col">
+            <div className="w-full rounded-xl grid grid-cols-2 gap-4 max-w-[850px]">
+              <LineChartSimp />
+              <Notes
+                title="Notes"
+                description="Some minor tips"
+                content=""
+                footer=""
+              />
+            </div>
             <div className="w-full rounded-xl grid gap-4 max-w-[850px]">
               <LineChartComp />
               <LineChartComp />

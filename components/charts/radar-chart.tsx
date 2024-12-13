@@ -23,7 +23,7 @@ const chartData = [
   { month: "Coordination", desktop: 237 },
   { month: "Accuracy", desktop: 273 },
   { month: "Composure", desktop: 209 },
-  { month: "Smart", desktop: 214 },
+  { month: "Consistency", desktop: 214 },
 ]
 
 const chartConfig = {

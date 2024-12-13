@@ -15,23 +15,24 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { getYear } from "date-fns"
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
+  { month: "Alice", desktop: 186, mobile: 80 },
+  { month: "Bob", desktop: 305, mobile: 200 },
+  { month: "Charlie", desktop: 237, mobile: 120 },
+  { month: "Diana", desktop: 73, mobile: 190 },
+  { month: "Eve", desktop: 209, mobile: 130 },
+  { month: "Frank", desktop: 214, mobile: 140 },
 ]
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
+    label: "Score",
+    color: "hsl(var(--chart-3))",
   },
   mobile: {
     label: "Mobile",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-3))",
   },
   label: {
     color: "hsl(var(--background))",
@@ -43,7 +44,7 @@ export default function Component() {
     <Card>
       <CardHeader>
         <CardTitle>Top six</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardDescription>NSMQ {getYear(Date())}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>

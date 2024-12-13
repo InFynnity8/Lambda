@@ -25,55 +25,53 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-const desktopData = [
-  { month: "january", desktop: 186, fill: "var(--color-january)" },
-  { month: "february", desktop: 305, fill: "var(--color-february)" },
-  { month: "march", desktop: 237, fill: "var(--color-march)" },
-  { month: "april", desktop: 173, fill: "var(--color-april)" },
-  { month: "may", desktop: 209, fill: "var(--color-may)" },
+import { getYear } from "date-fns"
+const statData = [
+  { group: "mstudents", total: 6, fill: "var(--color-mstudents)" },
+  { group: "fstudents", total: 4, fill: "var(--color-fstudents)" },
+  { group: "mteachers", total: 8, fill: "var(--color-mteachers)" },
+  { group: "fteachers", total: 3, fill: "var(--color-fteachers)" },
+  { group: "others", total: 5, fill: "var(--color-others)" },
 ]
 
 const chartConfig = {
   visitors: {
-    label: "Visitors",
+    label: "Total",
   },
-  desktop: {
-    label: "Desktop",
+  total: {
+    label: "Total",
   },
-  mobile: {
-    label: "Mobile",
-  },
-  january: {
-    label: "January",
+  mstudents: {
+    label: "Male students",
     color: "hsl(var(--chart-1))",
   },
-  february: {
-    label: "February",
+  fstudents: {
+    label: "Female students",
     color: "hsl(var(--chart-2))",
   },
-  march: {
-    label: "March",
+  mteachers: {
+    label: "Male teachers",
     color: "hsl(var(--chart-3))",
   },
-  april: {
-    label: "April",
+  fteachers: {
+    label: "Female teachers",
     color: "hsl(var(--chart-4))",
   },
-  may: {
-    label: "May",
+  others: {
+    label: "Others",
     color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig
 
 export default function Component() {
   const id = "pie-interactive"
-  const [activeMonth, setActiveMonth] = React.useState(desktopData[0].month)
+  const [activeGroup, setActiveGroup] = React.useState(statData[0].group)
 
   const activeIndex = React.useMemo(
-    () => desktopData.findIndex((item) => item.month === activeMonth),
-    [activeMonth]
+    () => statData.findIndex((item) => item.group === activeGroup),
+    [activeGroup]
   )
-  const months = React.useMemo(() => desktopData.map((item) => item.month), [])
+  const groups = React.useMemo(() => statData.map((item) => item.group), [])
 
   return (
     <Card data-chart={id} className="flex flex-col">
@@ -81,17 +79,17 @@ export default function Component() {
       <CardHeader className="flex-row items-start space-y-0 pb-0">
         <div className="grid gap-1">
           <CardTitle>Statistics</CardTitle>
-          <CardDescription>January - June 2024</CardDescription>
+          <CardDescription>NSMQ {getYear(Date())}</CardDescription>
         </div>
-        <Select value={activeMonth} onValueChange={setActiveMonth}>
+        <Select value={activeGroup} onValueChange={setActiveGroup}>
           <SelectTrigger
-            className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
+            className="ml-auto h-7 w-[155px] rounded-lg pl-2.5"
             aria-label="Select a value"
           >
-            <SelectValue placeholder="Select month" />
+            <SelectValue placeholder="Select group" />
           </SelectTrigger>
           <SelectContent align="end" className="rounded-xl">
-            {months.map((key) => {
+            {groups.map((key) => {
               const config = chartConfig[key as keyof typeof chartConfig]
 
               if (!config) {
@@ -128,12 +126,12 @@ export default function Component() {
           <PieChart>
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent className="w-[160px]" hideLabel />}
             />
             <Pie
-              data={desktopData}
-              dataKey="desktop"
-              nameKey="month"
+              data={statData}
+              dataKey="total"
+              nameKey="group"
               innerRadius={60}
               strokeWidth={5}
               activeIndex={activeIndex}
@@ -166,14 +164,14 @@ export default function Component() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {desktopData[activeIndex].desktop.toLocaleString()}
+                          {statData[activeIndex].total.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Total
                         </tspan>
                       </text>
                     )

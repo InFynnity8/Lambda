@@ -22,11 +22,11 @@ import { getYear } from "date-fns"
 const chartConfig = {
   speed: {
     label: "Speed",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-2))",
   },
   content: {
     label: "Content",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-4))",
   },
 } satisfies ChartConfig
 

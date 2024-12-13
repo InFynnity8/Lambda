@@ -36,7 +36,7 @@ export default function Page() {
           <Card className="h-[90px]" key={stat.title}>
             <CardContent className="flex flex-col h-[100%] items-center justify-center">
               <CardDescription className="flex flex-col items-center justify-center">
-                <h1 className="text-[]">{stat.title}</h1>
+                <h1>{stat.title}</h1>
               </CardDescription>
               {stat.value !== 0 ? (
                 <CountUp
@@ -51,6 +51,7 @@ export default function Page() {
                 "--"
               )}
             </CardContent>
+            
           </Card>
         ))}
       </div>

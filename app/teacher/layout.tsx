@@ -7,7 +7,6 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { ChevronRight } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -34,9 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <BreadcrumbItem>
                   <BreadcrumbPage className="line-clamp-1">
                     <p className="capitalize flex items-center">
-                      {pathname.slice(1, 8)}
-                      <ChevronRight className="text-gray-300 size-[15px]" />
-                      {pathname.slice(9)}
+                      {pathname.slice(1).replaceAll("/",  " » ")}
                     </p>
                   </BreadcrumbPage>
                 </BreadcrumbItem>
