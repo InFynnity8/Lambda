@@ -1,8 +1,11 @@
-import { Toaster } from "@/components/ui/toaster"
+"use client";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import "./globals.css";
+import { Provider } from "react-redux";
+import { store } from "@/store/store";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Lambda",
   description: "NSMQ Guide",
 };
@@ -12,13 +15,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // localStorage.setItem("isDarkMode", 'true');
-  // // Retrieve the boolean value
-  // const isDarkMode = localStorage.getItem("isDarkMode") === "true";
   return (
-    <html lang="en" className={`${true ? 'dark': ''}`}>
-      <body>{children}
-      <Toaster />
+    <html lang="en">
+      <head>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+      </head>
+      <body>
+        <Provider store={store}>{children}</Provider>
+        <Toaster />
       </body>
     </html>
   );

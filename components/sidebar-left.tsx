@@ -26,24 +26,33 @@ import {
 } from "@/components/ui/sidebar"
 
 // This is sample data.
+const themes: {
+  name: string
+  logo: React.ElementType
+  value: 'light' | 'dark' | 'night' | 'emerald'
+}[] = [
+  {
+    name: "Alpha",
+    logo: Command,
+    value: 'light',
+  },
+  {
+    name: "Beta",
+    logo: AudioWaveform,
+    value: 'dark',
+  },
+  {
+    name: "Gamma",
+    logo: Command,
+    value: 'night',
+  },
+  {
+    name: "Delta",
+    logo: Command,
+    value: 'emerald',
+  },
+]
 const data = {
-  teams: [
-    {
-      name: "Alpha",
-      logo: Command,
-      plan: "Enterprise",
-    },
-    {
-      name: "Beta",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Gamma",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
   navMain: [
     {
       title: "Dashboard",
@@ -106,7 +115,7 @@ export function SidebarLeft({
   return (
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher themes={themes} />
         <NavMain items={data.navMain} />
       </SidebarHeader>
       <SidebarContent>

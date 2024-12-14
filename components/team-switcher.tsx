@@ -1,14 +1,17 @@
 "use client"
 
 import * as React from "react"
-import { ChevronDown, Plus } from "lucide-react"
+import { ChevronDown} from "lucide-react"
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../store/store';
+import { setTheme } from '../store/themeSlice';
+import { useEffect } from 'react';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -19,15 +22,29 @@ import {
 } from "@/components/ui/sidebar"
 
 export function TeamSwitcher({
-  teams,
+  themes,
 }: {
-  teams: {
+  themes: {
     name: string
     logo: React.ElementType
-    plan: string
+    value: 'light' | 'dark' | 'night' | 'emerald'
   }[]
 }) {
-  const [activeTeam, setActiveTeam] = React.useState(teams[0])
+   
+  const theme = useSelector((state: RootState) => state.theme.mode);
+  const dispatch = useDispatch();
+  const [activeTeam, setActiveTeam] = React.useState(themes.find(item => item.value === theme))
+
+  useEffect(() => {
+    const html = document.documentElement;
+    html.className = ''; // Reset previous classes
+    html.classList.add(theme); // Apply current theme 
+  }, [theme]);
+
+  const handleThemeChange = (theme: 'light' | 'dark' | 'night' | 'emerald') => {
+    dispatch(setTheme(theme));
+    setActiveTeam(themes.find(item => item.value === theme))
+  };
 
   return (
     <SidebarMenu>
@@ -38,7 +55,7 @@ export function TeamSwitcher({
               <div className="flex aspect-square size-5 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
                 <activeTeam.logo className="size-3" />
               </div>
-              <span className="truncate font-semibold">{activeTeam.name}</span>
+              <span className="truncate font-semibold">{activeTeam?.name}</span>
               <ChevronDown className="opacity-50" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -49,28 +66,21 @@ export function TeamSwitcher({
             sideOffset={4}
           >
             <DropdownMenuLabel className="text-xs text-muted-foreground">
-              Teams
+              Themes
             </DropdownMenuLabel>
-            {teams.map((team, index) => (
+            {themes.map((theme) => (
               <DropdownMenuItem
-                key={team.name}
-                onClick={() => setActiveTeam(team)}
+                key={theme.name} 
                 className="gap-2 p-2"
+                onClick={ () => handleThemeChange(theme.value)}
               >
                 <div className="flex size-6 items-center justify-center rounded-sm border">
-                  <team.logo className="size-4 shrink-0" />
+                  <theme.logo className="size-4 shrink-0" />
                 </div>
-                {team.name}
-                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
+                {theme.name}
+                <DropdownMenuShortcut>⌘{theme.value}</DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="gap-2 p-2">
-              <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                <Plus className="size-4" />
-              </div>
-              <div className="font-medium text-muted-foreground">Add team</div>
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
