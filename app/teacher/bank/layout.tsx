@@ -1,7 +1,5 @@
 "use client";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,10 +10,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const handleHistory = () => router.back();
   return (
     <div className=" flex flex-col items-center p-4">
-      <div className="mb-4 w-full relative flex ">
-        <Input placeholder="Search" />
-        <Search className="absolute right-2 top-[6px] hover:cursor-pointer z-10" />
-      </div>
 
       <Tabs
         defaultValue="contests"

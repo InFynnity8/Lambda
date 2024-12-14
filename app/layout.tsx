@@ -16,7 +16,7 @@ export default function RootLayout({
   // // Retrieve the boolean value
   // const isDarkMode = localStorage.getItem("isDarkMode") === "true";
   return (
-    <html lang="en" className={`${false ? 'dark': ''}`}>
+    <html lang="en" className={`${true ? 'dark': ''}`}>
       <body>{children}
       <Toaster />
       </body>
