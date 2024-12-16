@@ -109,7 +109,7 @@ export default function TableDemo() {
   return (
     <div className="border rounded-xl overflow-hidden pb-4">
       <Table>
-        <TableCaption>A list of students data summary. <Link href='/teacher/database' className="text-black dark:text-blue-400">view details</Link></TableCaption>
+        <TableCaption>A list of students data summary. <Link href='/teacher/bio' className="text-primary">view details</Link></TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="">Student name</TableHead>

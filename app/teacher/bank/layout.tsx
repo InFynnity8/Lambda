@@ -1,7 +1,7 @@
 "use client";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter } from "next/navigation";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className="w-full box-border flex flex-col items-center gap-4 "
       >
         <div className="flex items-center justify-between w-full">
-          <Button variant="outline" onClick={handleHistory} className="px-2">
+          <Button title="back" variant="outline" onClick={handleHistory} className="px-2">
             <ChevronLeft />
           </Button>
           <TabsList>
@@ -51,7 +51,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Topics
             </TabsTrigger>
           </TabsList>
-          <div className="">🐏</div>
+          <Button title="forward" variant="outline" onClick={() => router.forward()} className="px-2">
+            <ChevronRight/>
+          </Button>
         </div>
         {children}
       </Tabs>

@@ -35,12 +35,13 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    columnFilter: string
   }
 
 
 
 
-export function DataTableDemo<TData, TValue>({columns, data}: DataTableProps<TData, TValue>) {
+export function DataTableDemo<TData, TValue>({columns, data, columnFilter}: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -72,10 +73,10 @@ export function DataTableDemo<TData, TValue>({columns, data}: DataTableProps<TDa
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter status..."
-          value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
+          placeholder="Search..."
+          value={(table.getColumn(columnFilter)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("status")?.setFilterValue(event.target.value)
+            table.getColumn(columnFilter)?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -157,10 +158,6 @@ export function DataTableDemo<TData, TValue>({columns, data}: DataTableProps<TDa
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
         <div className="space-x-2">
           <Button
             variant="outline"

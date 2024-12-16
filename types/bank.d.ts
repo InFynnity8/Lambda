@@ -1,6 +1,7 @@
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+export type Contest = {
+  title: string
+  // type: string
+  subject?: string
+  year: number
+  round: number
 }
