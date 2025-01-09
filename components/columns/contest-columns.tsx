@@ -47,15 +47,6 @@ export const contestColumns: ColumnDef<Contest>[] = [
     },
   },
   {
-    accessorKey: "round",
-    header: () => <div className="text-right">Round</div>,
-    cell: ({ row }) => {
-      return (
-        <div className="text-right font-medium">{row.getValue("round")}</div>
-      );
-    },
-  },
-  {
     id: "actions",
     enableHiding: false,
     cell: () => {

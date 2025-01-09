@@ -19,11 +19,11 @@ import {
 import { getYear } from "date-fns"
 const chartData = [
   { month: "Speed", desktop: 186 },
-  { month: "Content", desktop: 305 },
-  { month: "Coordination", desktop: 237 },
-  { month: "Accuracy", desktop: 273 },
-  { month: "Composure", desktop: 209 },
-  { month: "Consistency", desktop: 214 },
+  { month: "Chemistry", desktop: 305 },
+  { month: "Biology", desktop: 237 },
+  { month: "Content", desktop: 273 },
+  { month: "Physics", desktop: 209 },
+  { month: "Mathematics", desktop: 214 },
 ]
 
 const chartConfig = {
