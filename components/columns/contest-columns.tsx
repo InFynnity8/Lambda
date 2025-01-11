@@ -8,6 +8,7 @@ import { FcFile } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 
 import { Contest } from "@/types/bank";
+import Link from "next/link";
 
 export const contestColumns: ColumnDef<Contest>[] = [
   {
@@ -49,12 +50,14 @@ export const contestColumns: ColumnDef<Contest>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: () => {
+    cell: (u) => {
       return (
         <div className="text-right">
-          <Button variant="ghost" className=" h-8 w-16">
-            Open
-          </Button>
+          <Link href={`/teacher/bank/${u.row.getValue("title")}`}>
+            <Button variant="ghost" className=" h-8 w-16">
+              Open
+            </Button>
+          </Link>
         </div>
       );
     },
