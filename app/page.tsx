@@ -52,6 +52,7 @@ export default function Home() {
 
   return (
     <div className="flex items-center justify-center flex-col h-[100vh]">
+      <div className="rounded-full h-16 w-16" style={{backgroundImage: "url('/nsmq.png')", backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat"}}></div>
       <Tabs defaultValue="teacher" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="teacher">Teacher</TabsTrigger>

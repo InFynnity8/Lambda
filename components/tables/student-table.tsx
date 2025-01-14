@@ -103,7 +103,7 @@ const totals = {
     overallPerformance: students.reduce((acc, curr) => acc + curr.Performance, 0),
   };
 
-export default function TableDemo() {
+export default function TableDemo() { 
 
     const total = React.useMemo(() => totals, []);
   return (

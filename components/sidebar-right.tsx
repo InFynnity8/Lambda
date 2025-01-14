@@ -15,24 +15,10 @@ import {
 // This is sample data.
 const data = {
   user: {
-    name: "InFynnity",
-    email: "sackeyemmanuelfynn@gmail.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  calendars: [
-    {
-      name: "My Calendars",
-      items: ["Personal", "Work", "Family"],
-    },
-    {
-      name: "Favorites",
-      items: ["Holidays", "Birthdays"],
-    },
-    {
-      name: "Other",
-      items: ["Travel", "Reminders", "Deadlines"],
-    },
-  ],
+    name: "MPASS Quiz Team",
+    email: "mpraesoshsteam@gmail.com",
+    avatar: "nsmq.png",
+  }
 }
 
 export function SidebarRight({

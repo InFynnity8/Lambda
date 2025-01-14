@@ -30,10 +30,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             <Breadcrumb>
               <BreadcrumbList>
-                <BreadcrumbItem>
+                <BreadcrumbItem>  
                   <BreadcrumbPage className="line-clamp-1">
                     <p className="capitalize flex items-center">
-                      {pathname.slice(1).replaceAll("/",  " » ")}
+                      {pathname.slice(1).replaceAll("/", " » ")}
                     </p>
                   </BreadcrumbPage>
                 </BreadcrumbItem>
@@ -41,8 +41,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </Breadcrumb>
           </div>
         </header>
-
-        {children}
+        {/* watermark */}
+        <div className="flex items-center justify-center pt-20 fixed w-full h-full p-4 pointer-events-none">
+          <div
+          className="w-full h-full "
+            style={{
+              backgroundImage: "url('watermark4.png')",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "", 
+            }}  
+          />
+        </div>
+        <div className="z-100">{children}</div>
       </SidebarInset>
       <SidebarRight />
     </SidebarProvider>
