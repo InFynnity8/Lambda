@@ -1,8 +1,9 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain  } from "electron";
 import serve from "electron-serve";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+// import db from './database.js' ;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,7 +17,7 @@ const appServe = app.isPackaged ? serve({
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 600, 
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js")
@@ -29,7 +30,7 @@ const createWindow = () => {
     });
   } else {
     win.loadURL("http://localhost:3000");
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     win.webContents.on("did-fail-load", (e, code, desc) => {
       win.webContents.reloadIgnoringCache();
     });
@@ -44,4 +45,4 @@ app.on("window-all-closed", () => {
     if(process.platform !== "darwin"){
         app.quit();
     }
-});
+}); 

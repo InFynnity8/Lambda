@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <BreadcrumbList>
                 <BreadcrumbItem>  
                   <BreadcrumbPage className="line-clamp-1">
-                    <p className="capitalize flex items-center">
+                    <p className="capitalize flex items-center pointer-events-none">
                       {pathname.slice(1).replaceAll("/", " » ")}
                     </p>
                   </BreadcrumbPage>

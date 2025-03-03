@@ -81,20 +81,27 @@ export default function Page() {
   return (
     <>
       {/* cover */}
-      <div className="w-full h-80 relative mb-20" style={{backgroundImage: "url('champion.jpg')", backgroundSize: "cover", backgroundPosition: ""}}>
-        {/* profile photo */}
-        <div style={{backgroundImage: "url('OfficialPresecLogo.jpg')", backgroundSize: "cover", backgroundPosition: "center"}} className="border-2 border-secondary-background rounded-full bg-muted  size-28 md:size-32 lg:size-36 xl:size-40 absolute bottom-[-56px] md:bottom-[-64px] lg:bottom-[-72px] xl:bottom-[-80px] left-4"></div>
-        <div className=""> <Button variant="outline" className="rounded-3xl absolute right-4 bottom-[-48px]">Edit profile</Button> </div>
-      </div> 
-
+      <div
+        className="flex justify-center items-center w-full h-60 relative bg-muted"
+        style={{
+          backgroundImage: "url('/goodevening.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "",
+        }}
+      >
+        <div className="h-10 text-5xl text-white drop-shadow-[0_1px_2px_rgba(0,0,0,1)] ">
+          <h1> {greet} !</h1>
+        </div>
+      </div>
+ 
       <div className="flex flex-1 flex-col gap-4 p-4 ">
-        {/* <div className="h-64 w-full text-3xl">
-          <h1> {greet} !</h1> 
-        </div> */}
-        <h1 className="text-[20px] pt-5">Statistics</h1>
+        <h1 className="text-[20px] pt-5 font-bold">Statistics</h1>
         <div className="grid grid-cols-2 xl:grid-cols-4 w-full rounded-xl gap-4 max-w-[850px]">
           {stats.map((stat) => (
-            <Card className="h-[90px] bg-transparent backdrop-blur-lg" key={stat.title}>
+            <Card
+              className="h-[90px] bg-transparent backdrop-blur-lg"
+              key={stat.title}
+            >
               <CardContent className="flex flex-col h-[100%] items-center justify-center">
                 <CardDescription className="flex flex-col items-center justify-center">
                   <h1>{stat.title}</h1>
@@ -116,9 +123,9 @@ export default function Page() {
           ))}
         </div>
         <div className="w-full max-w-[850px] rounded-xl gap-4 grid">
-          <h1 className="text-[20px] pt-5">Bio</h1>
+          <h1 className="text-[20px] pt-5 font-bold">Bio</h1>
           <StudentTable />
-          <h1 className="text-[20px] pt-5">Analysis</h1>
+          <h1 className="text-[20px] pt-5 font-bold">Analysis</h1>
           <div className="w-full grid-cols-2 grid gap-4">
             <RadarChartComp />
           </div>

@@ -3,6 +3,11 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   //   const pathname = usePathname();
@@ -10,15 +15,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const handleHistory = () => router.back();
   return (
     <div className=" flex flex-col items-center p-4">
-
       <Tabs
         defaultValue="contests"
         className="w-full box-border flex flex-col items-center gap-4 "
       >
         <div className="flex items-center justify-between w-full">
-          <Button title="back" variant="outline" onClick={handleHistory} className="px-2">
-            <ChevronLeft />
-          </Button>
+          <Tooltip>
+            <TooltipContent>Back</TooltipContent>
+            <TooltipTrigger>
+              <Button
+                variant="outline"
+                onClick={handleHistory}
+                className="px-2"
+              >
+                <ChevronLeft />
+              </Button>
+            </TooltipTrigger>
+          </Tooltip>
           <TabsList>
             <TabsTrigger
               value="contests"
@@ -51,9 +64,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Topics
             </TabsTrigger>
           </TabsList>
-          <Button title="forward" variant="outline" onClick={() => router.forward()} className="px-2">
-            <ChevronRight/>
-          </Button>
+          <Tooltip>
+            <TooltipContent>Forward</TooltipContent>
+            <TooltipTrigger>
+              <Button
+                variant="outline"
+                onClick={() => router.forward()}
+                className="px-2"
+              >
+                <ChevronRight />
+              </Button>
+            </TooltipTrigger>
+          </Tooltip>
         </div>
         {children}
       </Tabs>
